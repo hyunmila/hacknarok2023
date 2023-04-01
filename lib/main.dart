@@ -1,6 +1,7 @@
 // import 'package:js';
 
 import 'package:flutter/material.dart';
+import 'package:hacknarok2023/user.dart';
 import 'package:hacknarok2023/user_profile.dart';
 import 'live_map.dart';
 
@@ -28,12 +29,14 @@ Future<void> main() async {
     }
   });
 
+  User user = User.fromDB("huanmila");
+
   return runApp(MaterialApp(
     title: "Title",
     initialRoute: "/",
     routes: {
       "/" : (context) => LiveMap(),
-      "/user" : (contex) => UserProfile()
+      "/user" : (contex) => UserProfile(user: user)
     }
   ));
 }

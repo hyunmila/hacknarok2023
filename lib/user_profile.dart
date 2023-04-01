@@ -1,10 +1,14 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'user.dart';
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({super.key});
+  const UserProfile({required this.user, super.key});
+
+  final user;
 
   @override
   _UserProfileState createState() => _UserProfileState();
@@ -108,8 +112,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
 class _UserProfileState extends State<UserProfile>{
   @override
-  var user = User.fromDB("huanmila");
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       // APP BAR
       appBar: AppBar(
@@ -167,7 +170,7 @@ class _UserProfileState extends State<UserProfile>{
                 child: 
                 ClipRRect(borderRadius: BorderRadius.circular(20), child:SizedBox.fromSize(
                   size: const Size.fromRadius(48),
-                  child: user.profileAvatar)
+                  child: widget.user.profileAvatar)
                 ) 
               ),
                 const SizedBox(
@@ -178,8 +181,8 @@ class _UserProfileState extends State<UserProfile>{
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   // USER NAME AND LEVEL
-                  Text(user.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ), textAlign: TextAlign.center),
-                  Text(user.levels(), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
+                  Text(widget.user.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ), textAlign: TextAlign.center),
+                  Text(widget.user.levels(), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
                 ])
             ]),
             const SizedBox(
@@ -210,7 +213,7 @@ class _UserProfileState extends State<UserProfile>{
                       borderRadius: BorderRadius.circular(30)),
                     child:
                   ListView(
-                    children: <Widget>[]+visitedList(user.visitedList))
+                    children: <Widget>[]+visitedList(widget.user.visitedList))
                   )
               )
               ),
@@ -242,7 +245,7 @@ class _UserProfileState extends State<UserProfile>{
                 child:
               ListView(
                 padding: const EdgeInsets.all(8),
-                children: <Widget>[]+favouriteList(user.favouriteList),
+                children: <Widget>[]+favouriteList(widget.user.favouriteList),
                 )
               )
             )
