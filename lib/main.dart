@@ -1,6 +1,7 @@
 // import 'package:js';
 
 import 'package:flutter/material.dart';
+import 'package:hacknarok2023/osm_query.dart';
 import 'live_map.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:developer';
+import 'osm_query.dart';
 
 
 Future<void> main() async {
@@ -20,6 +22,24 @@ Future<void> main() async {
 
   final storage = FirebaseStorage.instance;
   final db = FirebaseFirestore.instance;
+
+  List<OsmItem> items_sport = await OsmQuery.queryNodesAround(5000, 50.06175, 19.93617, {"sport": ["*"]});
+
+  for (var item in items_sport) {
+    log(item.name);
+  }
+
+  List<OsmItem> items_culture = await OsmQuery.queryNodesAround(5000, 50.06175, 19.93617, {"tourism": ["museum", "gallery", ], "amenity": ["theatre", "cinema"]});
+
+  for (var item in items_culture) {
+    log(item.name);
+  }
+
+  List<OsmItem> items_historic = await OsmQuery.queryNodesAround(5000, 50.06175, 19.93617, {"building": ["castle"]});
+
+  for (var item in items_culture) {
+    log(item.name);
+  }
 
   await db.collection("poi").get().then((event) {
     for (var doc in event.docs) {
