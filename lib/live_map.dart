@@ -43,7 +43,7 @@ class _LiveMapState extends State<LiveMap> {
             flex: 3,
             child: FlutterMap(
               options: MapOptions(
-                center: LatLng(45.5231, -122.6765),
+                center: LatLng(49.7446, 21.4723),
                 zoom: 13,
               ),
               children: [
@@ -62,7 +62,7 @@ class _LiveMapState extends State<LiveMap> {
             child: 
             Container(
               color: Colors.pink.shade200,
-              width: 400,
+              width: 1000,
               // height: 50,
               child: 
               Column(children: [
