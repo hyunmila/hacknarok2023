@@ -3,14 +3,37 @@
 import 'package:flutter/material.dart';
 import 'live_map.dart';
 
-void main() =>  runApp(MaterialApp(
-  title: "Title",
-  initialRoute: "/",
-  routes: {
-    "/" : (context) => LiveMap()
-  }
-));
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:developer';
 
+
+Future<void> main() async {
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final storage = FirebaseStorage.instance;
+  final db = FirebaseFirestore.instance;
+
+  await db.collection("poi").get().then((event) {
+    for (var doc in event.docs) {
+      log("${doc.id} => ${doc.data()}");
+    }
+  });
+
+  return runApp(MaterialApp(
+    title: "Title",
+    initialRoute: "/",
+    routes: {
+      "/" : (context) => LiveMap()
+    }
+  ));
+}
 
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
