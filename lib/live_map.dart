@@ -43,7 +43,7 @@ class _LiveMapState extends State<LiveMap> {
               ),
               children: [
                 TileLayer(
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  urlTemplate: 'https://api.mapbox.com/styles/v1/firebite/cjrax9zr50s9d2tkieemekyzk/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZmlyZWJpdGUiLCJhIjoiY2tsamU3ZWJ5MDczZTJxcDV2b2xwNDA1ciJ9.qLGhpgroGtPyBo35rvVb0w',
                   // userAgentPackageName: 'dev.fleaflet.flutter_map.example',
                 ),
               ],
