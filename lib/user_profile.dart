@@ -113,14 +113,30 @@ class _UserProfileState extends State<UserProfile>{
     return Scaffold(
       // APP BAR
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        foregroundColor: Colors.black,
         centerTitle: true,
-        title: 
-        const Text('User profile', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+        title: const Text('User profile', style: TextStyle(
+          // color: Colors.black, 
+          fontSize: 20), textAlign: TextAlign.center),
         backgroundColor: Colors.pink.shade200,
         actions: [
-          IconButton(onPressed: () {
+          IconButton(
+            // alignment: Alignment.topLeft,
+            onPressed: () {
             showSearch(context: context, delegate: CustomSearchDelegate());},
-          icon: const Icon(Icons.search))
+            icon: const Icon(Icons.search,
+            color: Colors.black,
+            
+          )),
+            IconButton(
+            // alignment: Alignment.topLeft,
+            onPressed: () {
+            Navigator.pop(context);},
+            icon: const Icon(Icons.map,
+            color: Colors.black,
+            
+          ))
         ]),
       body: DecoratedBox(
         decoration: const BoxDecoration(
@@ -169,16 +185,13 @@ class _UserProfileState extends State<UserProfile>{
             const SizedBox(
               height: 50,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
                 child:
                     Text('Recently visited places', style: TextStyle(
                     fontSize: 17, 
-                    background: Paint()
-                    ..strokeWidth = 23.0
-                    ..color = Colors.pink.shade200
-                    ..style = PaintingStyle.stroke
-                    ..strokeJoin = StrokeJoin.round)
+                    fontWeight: FontWeight.bold,
+                    )
                   ),
                 ),
                 // VISITED PLACES LIST
@@ -203,16 +216,13 @@ class _UserProfileState extends State<UserProfile>{
               ),
                 const SizedBox(
                 height: 25),
-              SizedBox(
+              const SizedBox(
                     height: 40,
                     child:
                     Text('User favourite places', style: TextStyle(
                     fontSize: 17, 
-                    background: Paint()
-                    ..strokeWidth = 23.0
-                    ..color = Colors.pink.shade200
-                    ..style = PaintingStyle.stroke
-                    ..strokeJoin = StrokeJoin.round)
+                    fontWeight: FontWeight.bold
+                    )
                   ),
                   ),
                   // FAVOURITE PLACES LIST

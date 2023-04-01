@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
+import 'package:latlong2/latlong.dart';
 
 final Uri overpassApiURI = Uri.https('overpass-api.de', 'api/interpreter');
 
@@ -13,6 +16,17 @@ class OsmItem {
   Map<String, dynamic> tags;
 
   OsmItem(this.name, this.lat, this.lon, this.tags);
+
+  Marker toMarker() => Marker(
+    point: LatLng(this.lat, this.lon),
+    width: 80,
+    height: 80,
+    builder: (context) => const Icon(
+      Icons.circle,
+      color: Colors.red,
+      size: 12,
+    ),
+  );
 
 }
 
