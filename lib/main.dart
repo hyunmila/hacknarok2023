@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hacknarok2023/osm_query.dart';
+import 'package:hacknarok2023/user_profile.dart';
 import 'live_map.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,24 +27,24 @@ Future<void> main() async {
   List<OsmItem> items_sport = await OsmQuery.queryNodesAround(5000, 50.06175, 19.93617, {"sport": ["*"]});
 
   for (var item in items_sport) {
-    log(item.name);
+    print(item.name);
   }
 
   List<OsmItem> items_culture = await OsmQuery.queryNodesAround(5000, 50.06175, 19.93617, {"tourism": ["museum", "gallery", ], "amenity": ["theatre", "cinema"]});
 
   for (var item in items_culture) {
-    log(item.name);
+    print(item.name);
   }
 
   List<OsmItem> items_historic = await OsmQuery.queryNodesAround(5000, 50.06175, 19.93617, {"building": ["castle"]});
 
   for (var item in items_culture) {
-    log(item.name);
+    print(item.name);
   }
 
   await db.collection("poi").get().then((event) {
     for (var doc in event.docs) {
-      log("${doc.id} => ${doc.data()}");
+      print("${doc.id} => ${doc.data()}");
     }
   });
 
@@ -51,7 +52,8 @@ Future<void> main() async {
     title: "Title",
     initialRoute: "/",
     routes: {
-      "/" : (context) => LiveMap()
+      "/" : (context) => LiveMap(),
+      "/user" : (contex) => UserProfile()
     }
   ));
 }
