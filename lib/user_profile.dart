@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
+// import 'package:google_fonts/google_fonts.dart';
+import 'user.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -10,24 +10,23 @@ class UserProfile extends StatefulWidget {
   _UserProfileState createState() => _UserProfileState();
 }
 
-List<Widget> visitedList(){
+List<Widget> visitedList(List visitedList){
   List<Widget> visited = [];
-  for(var i=0;i<10;i++){
+  for(var i=0;i<visitedList.length;i++){
     visited.add(Container(
       height: 30,
       color: Colors.purple.shade200,
-      child: Center(child: Text('Entry$i')),
-  ));}
+      child: Center(child: Text(visitedList[i]))));}
   return visited;
 }
-List<Widget> favouriteList(){
+
+List<Widget> favouriteList(List favouriteList){
   List<Widget> favourite = [];
-  for(var i=0;i<10;i++){
+  for(var i=0;i<favouriteList.length;i++){
     favourite.add(Container(
       height: 30,
       color: Colors.purple.shade200,
-      child: Center(child: Text('Entry$i')),
-  ));}
+      child: Center(child: Text(favouriteList[i])),));}
   return favourite;
 }
 
@@ -109,24 +108,24 @@ class CustomSearchDelegate extends SearchDelegate {
 
 class _UserProfileState extends State<UserProfile>{
   @override
+  var user = User();
   Widget build(BuildContext context){
     return Scaffold(
+      // APP BAR
       appBar: AppBar(
         centerTitle: true,
         title: 
         const Text('User profile', style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
-        // Text("User profile", style:GoogleFonts.getFont('Bai Jamjuree')),
         backgroundColor: Colors.pink.shade200,
         actions: [
           IconButton(onPressed: () {
-            showSearch(context: context, delegate: CustomSearchDelegate());
-          },
+            showSearch(context: context, delegate: CustomSearchDelegate());},
           icon: const Icon(Icons.search))
-        ],
-        ),
+        ]),
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
+            // BACKGROUND IMAGE
             image: AssetImage('assets/images/background1.jpg'), fit: BoxFit.cover)
             ),
       child: Center(child: Column(
@@ -134,14 +133,14 @@ class _UserProfileState extends State<UserProfile>{
         children: <Widget>[
         const SizedBox(
           width: 50,
-          height: 20,),
+          height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children : [
               const SizedBox(
                 width: 50,
-                height: 50,
-              ),
+                height: 50),
+              // PROFILE AVATAR
               Container(
                 width : 100,
                 height : 100,
@@ -152,27 +151,22 @@ class _UserProfileState extends State<UserProfile>{
                 child: 
                 ClipRRect(borderRadius: BorderRadius.circular(20), child:SizedBox.fromSize(
                   size: const Size.fromRadius(48),
-                  child: Image.asset('assets/images/82153266.jpg')
-                )
+                  child: user.profileAvatar)
                 ) 
               ),
                 const SizedBox(
                   width: 50,
-                  height: 50,
-              ),
+                  height: 50),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  const Text('User name', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ), textAlign: TextAlign.center),
-                  const Text('User level', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
-                  // Text('User Level', style:(GoogleFonts.getFont('Bai Jamjuree')), textScaleFactor: 1.5)
-                ],
-              )
-            ]
-            ),
+                  // USER NAME AND LEVEL
+                  Text(user.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ), textAlign: TextAlign.center),
+                  Text(user.level, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
+                ])
+            ]),
             const SizedBox(
-              // width: 50,
               height: 50,
               ),
               SizedBox(
@@ -187,28 +181,28 @@ class _UserProfileState extends State<UserProfile>{
                     ..strokeJoin = StrokeJoin.round)
                   ),
                 ),
-                Expanded(child: 
-              Container(
-                // height: 10,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.purple.shade200,
-                    style: BorderStyle.solid,
-                    width: 12
-                  ),
-                  color: Colors.purple.shade200,
-                  borderRadius: BorderRadius.circular(30)
-                ),
+                // VISITED PLACES LIST
+                // ignore: sized_box_for_whitespace
+                Container(
+                  height: 150,
                 child:
-              ListView(
-                // padding: const EdgeInsets.all(8),
-                children: <Widget>[]+visitedList(),
-              )
+                Expanded(child: 
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.purple.shade200,
+                        style: BorderStyle.solid,
+                        width: 12),
+                      color: Colors.purple.shade200,
+                      borderRadius: BorderRadius.circular(30)),
+                    child:
+                  ListView(
+                    children: <Widget>[]+visitedList(user.visitedList))
+                  )
               )
               ),
                 const SizedBox(
-                height: 25,
-              ),
+                height: 25),
               SizedBox(
                     height: 40,
                     child:
@@ -220,26 +214,29 @@ class _UserProfileState extends State<UserProfile>{
                     ..style = PaintingStyle.stroke
                     ..strokeJoin = StrokeJoin.round)
                   ),
-                  // Text('User favourite places:', style: GoogleFonts.getFont('Bai Jamjuree'), textScaleFactor: 1.5, textAlign: TextAlign.center,)
                   ),
+                  // FAVOURITE PLACES LIST
+                  // ignore: sized_box_for_whitespace
+                  Container(
+                    height: 150,
+                    child:
               Expanded(child:
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: Colors.purple.shade200,
                     style: BorderStyle.solid,
-                    width: 12
-                  ),
+                    width: 12),
                   color: Colors.purple.shade200,
-                  borderRadius: BorderRadius.circular(30)
-                ),
+                  borderRadius: BorderRadius.circular(30)),
                 child:
               ListView(
                 padding: const EdgeInsets.all(8),
-                children: <Widget>[]+favouriteList(),
+                children: <Widget>[]+favouriteList(user.favouriteList),
                 )
               )
-            ),
+            )
+                  ),
             const SizedBox(
                 height: 25,)
           ],
