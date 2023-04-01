@@ -108,7 +108,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
 class _UserProfileState extends State<UserProfile>{
   @override
-  var user = User();
+  var user = User.fromDB("huanmila");
   Widget build(BuildContext context){
     return Scaffold(
       // APP BAR
