@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:hacknarok2023/user_profile.dart';
@@ -32,13 +34,16 @@ class _LiveMapState extends State<LiveMap> {
           icon: const Icon(Icons.person))
         ],
         ),
-        body: Center(
-          child: Expanded(
+        body: Column(
+          children: [
+          // child: 
+          Expanded(
             // width: 200,
             // height: 200,
+            flex: 3,
             child: FlutterMap(
               options: MapOptions(
-                center: LatLng(45.5231, -122.6765),
+                center: LatLng(49.7446, 21.4723),
                 zoom: 13,
               ),
               children: [
@@ -49,6 +54,71 @@ class _LiveMapState extends State<LiveMap> {
               ],
             ),
           ),
+          // const SizedBox(
+          // height: 50,
+          // ),
+          Expanded(
+            flex: 1,
+            child: 
+            Container(
+              color: Colors.pink.shade200,
+              width: 1000,
+              // height: 50,
+              child: 
+              Column(children: [
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // SizedBox(width: 50,),
+                  IconButton(
+              onPressed: (){
+              
+              }, 
+            icon: const Icon(Icons.search)),
+              const Text('Recommendations:', style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold
+            ), textAlign: TextAlign.center,),
+            IconButton(
+              onPressed: (){
+              
+            }, 
+            icon: const Icon(Icons.autorenew_rounded)),
+              ],),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Icon(Icons.sports_baseball),
+              Text("    Sport"),
+            ],),
+              const SizedBox(
+                height: 20,
+              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Icon(Icons.theater_comedy_sharp),
+              Text("    Culture"),
+            ],),
+              const SizedBox(
+                height: 20,
+              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Icon(Icons.church),
+              Text("    History"),
+            ],),
+            ],)
+            ),
+            
+            )]
         ),
       );
   }

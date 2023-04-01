@@ -15,7 +15,7 @@ List<Widget> visitedList(List visitedList){
   for(var i=0;i<visitedList.length;i++){
     visited.add(Container(
       height: 30,
-      color: Colors.purple.shade200,
+      color: Colors.pink.shade200,
       child: Center(child: Text(visitedList[i]))));}
   return visited;
 }
@@ -25,7 +25,7 @@ List<Widget> favouriteList(List favouriteList){
   for(var i=0;i<favouriteList.length;i++){
     favourite.add(Container(
       height: 30,
-      color: Colors.purple.shade200,
+      color: Colors.pink.shade200,
       child: Center(child: Text(favouriteList[i])),));}
   return favourite;
 }
@@ -179,7 +179,7 @@ class _UserProfileState extends State<UserProfile>{
                 children: [
                   // USER NAME AND LEVEL
                   Text(user.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ), textAlign: TextAlign.center),
-                  Text(user.level, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
+                  Text(user.levels(), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
                 ])
             ]),
             const SizedBox(
@@ -203,10 +203,10 @@ class _UserProfileState extends State<UserProfile>{
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.purple.shade200,
+                        color: Colors.pink.shade200,
                         style: BorderStyle.solid,
                         width: 12),
-                      color: Colors.purple.shade200,
+                      color: Colors.pink.shade200,
                       borderRadius: BorderRadius.circular(30)),
                     child:
                   ListView(
@@ -234,10 +234,10 @@ class _UserProfileState extends State<UserProfile>{
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.purple.shade200,
+                    color: Colors.pink.shade200,
                     style: BorderStyle.solid,
                     width: 12),
-                  color: Colors.purple.shade200,
+                  color: Colors.pink.shade200,
                   borderRadius: BorderRadius.circular(30)),
                 child:
               ListView(
