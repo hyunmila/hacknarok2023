@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "815142586286",
+    "project_id": "hacknarok-spejsy",
+    "storage_bucket": "hacknarok-spejsy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815142586286:android:fc240d53c1112e6f1aea3f",
+        "android_client_info": {
+          "package_name": "com.example.hacknarok2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815142586286-kqu7sig3kuje9fbkbhnnn2m511diq0g4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP0_ShWw1YDOPjyh_J3lZanTeCCZpUNI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815142586286-kqu7sig3kuje9fbkbhnnn2m511diq0g4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
