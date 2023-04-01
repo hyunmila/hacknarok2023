@@ -1,6 +1,7 @@
 // import 'package:js';
 
 import 'package:flutter/material.dart';
+import 'package:hacknarok2023/user_profile.dart';
 import 'live_map.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,7 +32,8 @@ Future<void> main() async {
     title: "Title",
     initialRoute: "/",
     routes: {
-      "/" : (context) => LiveMap()
+      "/" : (context) => LiveMap(),
+      "/user" : (contex) => UserProfile()
     }
   ));
 }
