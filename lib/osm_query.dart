@@ -37,9 +37,9 @@ class OsmQuery {
     tags.forEach((tag, value) {
       value.forEach((element) {
         if (element == '*') {
-          body += "node.a[$tag];";
+          body += "node.a[name][$tag];";
         } else {
-          body += "node.a[$tag=$element];";
+          body += "node.a[name][$tag=$element];";
         }
       });
     });
