@@ -1,13 +1,13 @@
 // import 'package:js';
 
 import 'package:flutter/material.dart';
-import 'user_profile.dart';
+import 'live_map.dart';
 
 void main() =>  runApp(MaterialApp(
   title: "Title",
   initialRoute: "/",
   routes: {
-    "/" : (context) => UserProfile()
+    "/" : (context) => LiveMap()
   }
 ));
 
