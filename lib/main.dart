@@ -30,6 +30,12 @@ Future<void> main() async {
   //   }
   // });
 
+  //List<OsmItem> items_sport = await OsmQuery.queryNodesAround(10000, 50.06175, 19.93617, {"sport": ["*"]});
+
+  //List<OsmItem> items_culture = await OsmQuery.queryNodesAround(10000, 50.06175, 19.93617, {"tourism": ["museum", "gallery", ], "amenity": ["theatre", "cinema"]});
+
+  //List<OsmItem> items_historic = await OsmQuery.queryNodesAround(10000, 50.06175, 19.93617, {"historic": ["castle"]});
+
   User user = User.fromDB("huanmila");
 
   return runApp(MaterialApp(

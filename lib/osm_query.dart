@@ -27,8 +27,9 @@ class OsmItem {
   double lat;
   double lon;
   Map<String, dynamic> tags;
+  String recommendTag;
 
-  OsmItem(this.name, this.lat, this.lon, this.tags);
+  OsmItem(this.name, this.lat, this.lon, this.tags, this.recommendTag);
 
   OSMMarker toMarker() => OSMMarker(
     name: this.name,
@@ -65,13 +66,38 @@ class OsmQuery {
     http.post(overpassApiURI, body: body).then((response) {
       var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-      var items = data["elements"].map((x) =>
-        OsmItem(
-          x["tags"].containsKey("name") ? x["tags"]["name"] : "",
-          x["lat"],
-          x["lon"],
-          x["tags"])
-      ).toList();
+      var items = data["elements"].map((x) {
+        if (!x.containsKey("tags")) {
+          log("dupsko");
+        }
+
+        String recommendTag = "";
+        if (x["tags"].containsKey("sport")) {
+          recommendTag = x["tags"]["sport"];
+        }
+        else if (x["tags"].containsKey("tourism")) {
+          recommendTag = x["tags"]["tourism"];
+        }
+        else if (x["tags"].containsKey("amenity")) {
+          recommendTag = x["tags"]["amenity"];
+        }
+        else if (x["tags"].containsKey("historic")) {
+          recommendTag = x["tags"]["historic"];
+        }
+
+        recommendTag = recommendTag.split(';')[0];
+
+        return OsmItem(
+            x["tags"].containsKey("name") ? x["tags"]["name"] : "",
+            x["lat"],
+            x["lon"],
+            x["tags"],
+            recommendTag);
+      }).toList();
+
+      //for (var item in items) {
+      //  log(item.recommendTag);
+      //}
 
       c.complete(List<OsmItem>.from(items));
     });
