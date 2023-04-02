@@ -118,9 +118,11 @@ class _UserProfileState extends State<UserProfile>{
           IconButton(
             // alignment: Alignment.topLeft,
             onPressed: () async {
-              await User.fetchAll().then((value) {
-                searchUsers = value;
-                showSearch(context: context, delegate: CustomSearchDelegate());
+              await User.fetchAll().then((value) async {
+                setState(() async {
+                  searchUsers = value;
+                  showSearch(context: context, delegate: CustomSearchDelegate());
+                });
               });
             },
             icon: const Icon(Icons.search,

@@ -35,7 +35,11 @@ class User {
     final Completer<List<User>> c = Completer();
 
     db.collection("profiles").get().then((data) {
-      var users = data.docs.map((u) => User(u.data()["name"], Image.asset('assets/images/82153266.jpg'), u.data()["visitedList"], u.data()["favouriteList"])).toList();
+      var users = data.docs.map((u) => User(
+          u.data()["name"], Image.asset('assets/images/82153266.jpg'),
+          {...u.data()["visitedList"]},
+          {...u.data()["favouriteList"]})
+        );
 
       c.complete(List<User>.from(users));
     });
