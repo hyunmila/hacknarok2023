@@ -16,20 +16,16 @@ class Popup extends StatefulWidget {
 
 class _PopupState extends State<Popup> {
   
-  // final List<IconData> _icons = [
-  //   Icons.star_border,
-  //   Icons.star_half,
-  //   Icons.star
-  // ];
-  // int _currentIcon = 0;
   void _incrementVisited(markername){
     setState(() {
       widget.user.visitedList.add(markername);
+      widget.user.push();
     });
   }
   void _incrementFavourite(markername){
   setState(() {
     widget.user.favouriteList.add(markername);
+    widget.user.push();
   });
   }
   @override
@@ -42,12 +38,9 @@ class _PopupState extends State<Popup> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-          // Padding(
-          //     padding: const EdgeInsets.only(left: 20, right: 10),
-          //     // child: Icon(_icons[_currentIcon]),
-          //   ),
             _cardDescription(context),
-        ]),
+        ]
+        ),
         )
     );
   }
@@ -62,8 +55,8 @@ class _PopupState extends State<Popup> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            const Text(
-              'Place name',
+            Text(
+              widget.marker.name,
               overflow: TextOverflow.fade,
               softWrap: false,
               style: TextStyle(
@@ -72,12 +65,7 @@ class _PopupState extends State<Popup> {
               ),
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 4.0)),
-            // Text(
-            //   // 'Position: ${widget.marker.point.latitude}, ${widget.marker.point.longitude}',
-            //   'Add to visited places',
-            //   style: const TextStyle(fontSize: 12.0)),
             Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
               IconButton(
                 tooltip: 'Add to visited places',
@@ -88,11 +76,6 @@ class _PopupState extends State<Popup> {
                 onPressed: (){_incrementFavourite(widget.marker.name);}, 
               icon: Icon(Icons.favorite)),
             ],),
-              
-            // Text(
-            //   'Add to favourite places',
-            //   style: const TextStyle(fontSize: 12.0),
-            // ),
           ],
         ),
       ),
