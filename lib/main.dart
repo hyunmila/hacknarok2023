@@ -12,6 +12,7 @@ import 'firebase_options.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:developer';
 import "package:hacknarok2023/user.dart";
+import 'package:flutter_launcher_icons/android.dart';
 
 
 Future<void> main() async {
@@ -33,7 +34,7 @@ Future<void> main() async {
   User user = User.fromDB("huanmila");
 
   return runApp(MaterialApp(
-    title: "Title",
+    title: "Maporio",
     initialRoute: "/",
     routes: {
       "/" : (context) => LiveMap(user: user),
