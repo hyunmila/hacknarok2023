@@ -14,23 +14,23 @@ class UserProfile extends StatefulWidget {
   _UserProfileState createState() => _UserProfileState();
 }
 
-List<Widget> visitedList(List visitedList){
+List<Widget> visitedList(Set visitedList){
   List<Widget> visited = [];
-  for(var i=0;i<visitedList.length;i++){
+  for(var elem in visitedList){
     visited.add(Container(
       height: 30,
       color: Colors.pink.shade200,
-      child: Center(child: Text(visitedList[i]))));}
+      child: Center(child: Text(elem))));}
   return visited;
 }
 
-List<Widget> favouriteList(List favouriteList){
+List<Widget> favouriteList(Set favouriteList){
   List<Widget> favourite = [];
-  for(var i=0;i<favouriteList.length;i++){
+  for(var elem in favouriteList){
     favourite.add(Container(
       height: 30,
       color: Colors.pink.shade200,
-      child: Center(child: Text(favouriteList[i])),));}
+      child: Center(child: Text(elem)),));}
   return favourite;
 }
 
@@ -117,7 +117,7 @@ class _UserProfileState extends State<UserProfile>{
       // APP BAR
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.grey.shade800,
         centerTitle: true,
         title: const Text('User profile', style: TextStyle(
           // color: Colors.black, 
@@ -129,7 +129,7 @@ class _UserProfileState extends State<UserProfile>{
             onPressed: () {
             showSearch(context: context, delegate: CustomSearchDelegate());},
             icon: const Icon(Icons.search,
-            color: Colors.black,
+            // color: Colors.black,
             
           )),
             IconButton(
@@ -137,7 +137,7 @@ class _UserProfileState extends State<UserProfile>{
             onPressed: () {
             Navigator.pop(context);},
             icon: const Icon(Icons.map,
-            color: Colors.black,
+            // color: Colors.black,
             
           ))
         ]),
@@ -181,8 +181,8 @@ class _UserProfileState extends State<UserProfile>{
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   // USER NAME AND LEVEL
-                  Text(widget.user.name, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, ), textAlign: TextAlign.center),
-                  Text(widget.user.levels(), style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
+                  Text(widget.user.name, style: const TextStyle(color: Color.fromRGBO(66, 66, 66, 1), fontSize: 20, fontWeight: FontWeight.bold, ), textAlign: TextAlign.center),
+                  Text(widget.user.levels(), style: const TextStyle(color: Color.fromRGBO(66, 66, 66, 1), fontSize: 20, fontWeight: FontWeight.bold,), textAlign: TextAlign.center,)
                 ])
             ]),
             const SizedBox(
@@ -192,6 +192,7 @@ class _UserProfileState extends State<UserProfile>{
                 height: 40,
                 child:
                     Text('Recently visited places', style: TextStyle(
+                      color: Color.fromRGBO(66, 66, 66, 1),
                     fontSize: 17, 
                     fontWeight: FontWeight.bold,
                     )
@@ -223,6 +224,7 @@ class _UserProfileState extends State<UserProfile>{
                     height: 40,
                     child:
                     Text('User favourite places', style: TextStyle(
+                      color: Color.fromRGBO(66, 66, 66, 1),
                     fontSize: 17, 
                     fontWeight: FontWeight.bold
                     )

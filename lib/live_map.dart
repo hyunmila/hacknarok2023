@@ -26,7 +26,7 @@ class _LiveMapState extends State<LiveMap> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.grey.shade800,
         centerTitle: true,
         title: const Text('Maps', style: TextStyle(
           fontSize: 20), textAlign: TextAlign.center),
@@ -123,15 +123,18 @@ class _LiveMapState extends State<LiveMap> {
                 });
 
                 },
-            icon: const Icon(Icons.search)),
+            icon: const Icon(Icons.search,
+            color: Color.fromRGBO(66, 66, 66, 1))),
               const Text('Recommendations:', style: TextStyle(
+                color: Color.fromRGBO(66, 66, 66, 1),
               fontSize: 17,
               fontWeight: FontWeight.bold
             ), textAlign: TextAlign.center,),
             IconButton(
               onPressed: () {},
               // ),
-            icon: const Icon(Icons.autorenew_rounded)),
+            icon: const Icon(Icons.autorenew_rounded,
+            color: Color.fromRGBO(66, 66, 66, 1))),
               ],),
               // const SizedBox(
               //   height: 20,
@@ -139,7 +142,7 @@ class _LiveMapState extends State<LiveMap> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(Icons.sports_baseball),
+              Icon(Icons.sports_baseball, color: Color.fromRGBO(66, 66, 66, 1)),
               Text("    Sport"),
             ],),
               const SizedBox(
@@ -148,7 +151,7 @@ class _LiveMapState extends State<LiveMap> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(Icons.theater_comedy_sharp),
+              Icon(Icons.theater_comedy_sharp, color: Color.fromRGBO(66, 66, 66, 1)),
               Text("    Culture"),
             ],),
               const SizedBox(
@@ -157,7 +160,7 @@ class _LiveMapState extends State<LiveMap> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(Icons.church),
+              Icon(Icons.church, color: Color.fromRGBO(66, 66, 66, 1)),
               Text("    History"),
             ],),
             ],)
