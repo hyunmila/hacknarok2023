@@ -2,24 +2,36 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'user.dart';
+import 'osm_query.dart';
 
 class Popup extends StatefulWidget {
-  final Marker marker;
+  final dynamic marker;
 
-  const Popup(this.marker, {Key? key}) : super(key: key);
-
+  const Popup({required this.user, required this.marker, Key? key}) : super(key: key);
+  final user;
   @override
   State<StatefulWidget> createState() => _PopupState();
 }
 
 class _PopupState extends State<Popup> {
+  
   // final List<IconData> _icons = [
   //   Icons.star_border,
   //   Icons.star_half,
   //   Icons.star
   // ];
   // int _currentIcon = 0;
-
+  void _incrementVisited(markername){
+    setState(() {
+      widget.user.visitedList.add(markername);
+    });
+  }
+  void _incrementFavourite(markername){
+  setState(() {
+    widget.user.favouriteList.add(markername);
+  });
+  }
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -37,22 +49,6 @@ class _PopupState extends State<Popup> {
             _cardDescription(context),
         ]),
         )
-      
-      // InkWell(
-      //   onTap: () => setState(() {
-      //     _currentIcon = (_currentIcon + 1) % _icons.length;
-      //   }),
-      //   child: Row(
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: <Widget>[
-      //       Padding(
-      //         padding: const EdgeInsets.only(left: 20, right: 10),
-      //         child: Icon(_icons[_currentIcon]),
-      //       ),
-      //       _cardDescription(context),
-      //     ],
-      //   ),
-      // ),
     );
   }
 
@@ -85,14 +81,12 @@ class _PopupState extends State<Popup> {
               children: [
               IconButton(
                 tooltip: 'Add to visited places',
-                onPressed: (){
-
-              }, icon: Icon(Icons.add_box_outlined)),
+                onPressed: () {_incrementVisited(widget.marker.name);},
+              icon: Icon(Icons.add_box_outlined)),
               IconButton(
                 tooltip: 'Add to favourite places',
-                onPressed: (){
-
-              }, icon: Icon(Icons.favorite)),
+                onPressed: (){_incrementFavourite(widget.marker.name);}, 
+              icon: Icon(Icons.favorite)),
             ],),
               
             // Text(

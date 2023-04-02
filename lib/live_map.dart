@@ -7,7 +7,10 @@ import 'package:hacknarok2023/user_profile.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'popup.dart';
+import 'user.dart';
 class LiveMap extends StatefulWidget {
+  const LiveMap({required this.user, super.key});
+  final user;
   @override
   _LiveMapState createState() => _LiveMapState();
 }
@@ -62,7 +65,7 @@ class _LiveMapState extends State<LiveMap> {
                     popupSnap: PopupSnap.markerCenter,//widget.snap,
                     popupController: _popupLayerController,
                     popupBuilder: (BuildContext context, Marker marker) =>
-                        Popup(marker),
+                        Popup(user: widget.user,marker: marker),
                     // markerRotate: widget.rotate,
                     // markerRotateAlignment:
                     //     PopupMarkerLayerOptions.rotationAlignmentFor(

@@ -1,6 +1,7 @@
 // import 'package:js';
 
 import 'package:flutter/material.dart';
+import 'package:hacknarok2023/user.dart';
 import 'package:hacknarok2023/user_profile.dart';
 import 'live_map.dart';
 
@@ -22,11 +23,11 @@ Future<void> main() async {
   final storage = FirebaseStorage.instance;
   final db = FirebaseFirestore.instance;
 
-  await db.collection("poi").get().then((event) {
-    for (var doc in event.docs) {
-      log("${doc.id} => ${doc.data()}");
-    }
-  });
+  // await db.collection("poi").get().then((event) {
+  //   for (var doc in event.docs) {
+  //     log("${doc.id} => ${doc.data()}");
+  //   }
+  // });
 
   User user = User.fromDB("huanmila");
 
@@ -34,7 +35,7 @@ Future<void> main() async {
     title: "Title",
     initialRoute: "/",
     routes: {
-      "/" : (context) => LiveMap(),
+      "/" : (context) => LiveMap(user: user),
       "/user" : (contex) => UserProfile(user: user)
     }
   ));
