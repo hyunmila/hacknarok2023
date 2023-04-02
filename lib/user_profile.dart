@@ -37,6 +37,18 @@ List<Widget> favouriteList(Set favouriteList){
 }
 
 class CustomSearchDelegate extends SearchDelegate {
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return ThemeData(
+      appBarTheme: const AppBarTheme(
+        foregroundColor: Color.fromRGBO(66, 66, 66, 1),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 244, 143, 177),
+      ),
+    );
+  }
+
   // first overwrite to
   // clear the search text
   @override
@@ -63,10 +75,10 @@ class CustomSearchDelegate extends SearchDelegate {
   // third overwrite to show query result
   @override
   Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
+    List<User> matchQuery = [];
     for (var user in searchUsers) {
       if (user.name.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(user.name);
+        matchQuery.add(user);
       }
     }
     return ListView.builder(
@@ -74,7 +86,7 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          title: Text(result),
+          title: Text(result.name),
         );
       },
     );
@@ -83,10 +95,10 @@ class CustomSearchDelegate extends SearchDelegate {
   // querying process at the runtime
   @override
   Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
+    List<User> matchQuery = [];
     for (var user in searchUsers) {
       if (user.name.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(user.name);
+        matchQuery.add(user);
       }
     }
     return ListView.builder(
@@ -94,9 +106,13 @@ class CustomSearchDelegate extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          title: Text(result),
-        );
-      },
+          title: Text(result.name),
+          onTap: () async {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UserProfile(user: result)),
+            );}
+        );},
     );
   }
 }
@@ -107,7 +123,7 @@ class _UserProfileState extends State<UserProfile>{
     return Scaffold(
       // APP BAR
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         foregroundColor: Colors.grey.shade800,
         centerTitle: true,
         title: const Text('User profile', style: TextStyle(
@@ -119,7 +135,7 @@ class _UserProfileState extends State<UserProfile>{
             // alignment: Alignment.topLeft,
             onPressed: () async {
               await User.fetchAll().then((value) async {
-                setState(() async {
+                setState(() {
                   searchUsers = value;
                   showSearch(context: context, delegate: CustomSearchDelegate());
                 });

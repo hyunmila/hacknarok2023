@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -27,6 +28,7 @@ class User {
       name = data.docs[0].data()["name"];
       visitedList = {...data.docs[0].data()["visitedList"]};
       favouriteList = {...data.docs[0].data()["favouriteList"]};
+      profileAvatar = Image.memory(base64Decode(data.docs[0].data()["profileAvatar"]));
     });
   }
 
@@ -35,11 +37,16 @@ class User {
     final Completer<List<User>> c = Completer();
 
     db.collection("profiles").get().then((data) {
-      var users = data.docs.map((u) => User(
-          u.data()["name"], Image.asset('assets/images/82153266.jpg'),
-          {...u.data()["visitedList"]},
-          {...u.data()["favouriteList"]})
+      var users = data.docs.map((u) {
+        User user = User(
+            u.data()["name"], Image.asset('assets/images/82153266.jpg'),
+            {...u.data()["visitedList"]},
+            {...u.data()["favouriteList"]}
         );
+        user.profileAvatar = Image.memory(base64Decode(u.data()["profileAvatar"]));
+
+        return user;
+      });
 
       c.complete(List<User>.from(users));
     });
