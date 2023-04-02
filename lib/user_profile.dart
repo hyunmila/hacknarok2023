@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'user.dart';
 
+List<User> searchUsers = [];
+
 class UserProfile extends StatefulWidget {
   const UserProfile({required this.user, super.key});
 
@@ -35,17 +37,6 @@ List<Widget> favouriteList(Set favouriteList){
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  // Demo list to show querying
-  List<String> searchTerms = [
-    "Apple",
-    "Banana",
-    "Mango",
-    "Pear",
-    "Watermelons",
-    "Blueberries",
-    "Pineapples",
-    "Strawberries"
-  ];
   // first overwrite to
   // clear the search text
   @override
@@ -73,9 +64,9 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
+    for (var user in searchUsers) {
+      if (user.name.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(user.name);
       }
     }
     return ListView.builder(
@@ -93,9 +84,9 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
+    for (var user in searchUsers) {
+      if (user.name.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(user.name);
       }
     }
     return ListView.builder(
@@ -126,8 +117,12 @@ class _UserProfileState extends State<UserProfile>{
         actions: [
           IconButton(
             // alignment: Alignment.topLeft,
-            onPressed: () {
-            showSearch(context: context, delegate: CustomSearchDelegate());},
+            onPressed: () async {
+              await User.fetchAll().then((value) {
+                searchUsers = value;
+                showSearch(context: context, delegate: CustomSearchDelegate());
+              });
+            },
             icon: const Icon(Icons.search,
             // color: Colors.black,
             

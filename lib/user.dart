@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,6 +28,19 @@ class User {
       visitedList = {...data.docs[0].data()["visitedList"]};
       favouriteList = {...data.docs[0].data()["favouriteList"]};
     });
+  }
+
+  static Future<List<User>> fetchAll() async {
+    final db = FirebaseFirestore.instance;
+    final Completer<List<User>> c = Completer();
+
+    db.collection("profiles").get().then((data) {
+      var users = data.docs.map((u) => User(u.data()["name"], Image.asset('assets/images/82153266.jpg'), u.data()["visitedList"], u.data()["favouriteList"])).toList();
+
+      c.complete(List<User>.from(users));
+    });
+
+    return c.future;
   }
 
   void push() async {
