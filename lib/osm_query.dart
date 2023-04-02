@@ -9,6 +9,19 @@ import 'package:latlong2/latlong.dart';
 
 final Uri overpassApiURI = Uri.https('overpass-api.de', 'api/interpreter');
 
+class OSMMarker extends Marker {
+  String name;
+  
+  OSMMarker({required String name, required LatLng point, required double width, required double height, required builder})
+      : 
+      this.name = name,
+      super(
+          height: width,
+          width: height,
+          point: point,
+          builder: builder,
+      );
+}
 class OsmItem {
   String name;
   double lat;
@@ -17,10 +30,11 @@ class OsmItem {
 
   OsmItem(this.name, this.lat, this.lon, this.tags);
 
-  Marker toMarker() => Marker(
+  OSMMarker toMarker() => OSMMarker(
+    name: this.name,
     point: LatLng(this.lat, this.lon),
-    width: 80,
-    height: 80,
+    width: 80.0,
+    height: 80.0,
     builder: (context) => const Icon(
       Icons.circle,
       color: Colors.red,
