@@ -16,6 +16,7 @@ class _LiveMapState extends State<LiveMap> {
 
   List<OsmItem> items = [];
   final PopupController _popupLayerController = PopupController();
+  final MapController _mapController = MapController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class _LiveMapState extends State<LiveMap> {
             // height: 200,
             flex: 3,
             child: FlutterMap(
+              mapController: _mapController,
               options: MapOptions(
                 center: LatLng(50.06175, 19.93617),
                 zoom: 13,
@@ -110,12 +112,14 @@ class _LiveMapState extends State<LiveMap> {
                   IconButton(
               onPressed: () async {
                 WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-                setState(() async {
-                  var new_items = await OsmQuery.queryNodesAround(5000, 50.06175, 19.93617, {"sport": ["*"]});
+
+                await OsmQuery.queryNodesAround(5000, _mapController.center.latitude, _mapController.center.longitude, {"sport": ["*"]}).then((new_items) {
                   setState(() {
-                    this.items = new_items;
+                      this.items = new_items;
                   });
-              });}, 
+                });
+
+                },
             icon: const Icon(Icons.search)),
               const Text('Recommendations:', style: TextStyle(
               fontSize: 17,
