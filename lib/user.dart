@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class User {
   String name = "huanmila";
   Image profileAvatar = Image.asset('assets/images/82153266.jpg');
-  Set visitedList = Set<String>();
-  Set favouriteList = Set<String>();
+  Set<String> visitedList = Set<String>();
+  Set<String> favouriteList = Set<String>();
   String levels(){
     // var level = (visitedList.length)*(1/2);
     var level = pow(visitedList.length, (1/2));

@@ -8,6 +8,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'popup.dart';
 import 'user.dart';
+import 'recommend.dart';
 class LiveMap extends StatefulWidget {
   const LiveMap({required this.user, super.key});
   final user;
@@ -20,6 +21,7 @@ class _LiveMapState extends State<LiveMap> {
   List<OsmItem> items = [];
   final PopupController _popupLayerController = PopupController();
   final MapController _mapController = MapController();
+  List<String> recommended = ['-', '-', '-'];
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +133,13 @@ class _LiveMapState extends State<LiveMap> {
               fontWeight: FontWeight.bold
             ), textAlign: TextAlign.center,),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  print(this.recommended);
+                  
+                  this.recommended = getRecommended(this.items.map<String>((e) => e.name).toSet(), widget.user.visitedList) as List<String>;
+                });
+              },
               // ),
             icon: const Icon(Icons.autorenew_rounded,
             color: Color.fromRGBO(66, 66, 66, 1))),
@@ -143,7 +151,7 @@ class _LiveMapState extends State<LiveMap> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
               Icon(Icons.sports_baseball, color: Color.fromRGBO(66, 66, 66, 1)),
-              Text("    Sport"),
+              Text("     " + this.recommended[0]),
             ],),
               const SizedBox(
                 height: 20,
@@ -152,7 +160,7 @@ class _LiveMapState extends State<LiveMap> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
               Icon(Icons.theater_comedy_sharp, color: Color.fromRGBO(66, 66, 66, 1)),
-              Text("    Culture"),
+              Text("     " + this.recommended[1]),
             ],),
               const SizedBox(
                 height: 20,
@@ -161,7 +169,7 @@ class _LiveMapState extends State<LiveMap> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
               Icon(Icons.church, color: Color.fromRGBO(66, 66, 66, 1)),
-              Text("    History"),
+              Text("     " + this.recommended[2]),
             ],),
             ],)
             ),
