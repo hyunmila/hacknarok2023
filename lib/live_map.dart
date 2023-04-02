@@ -21,7 +21,7 @@ class _LiveMapState extends State<LiveMap> {
   List<OsmItem> items = [];
   final PopupController _popupLayerController = PopupController();
   final MapController _mapController = MapController();
-  List<String> recommended = ['-', '-', '-'];
+  List<OsmItem?> recommended = [null, null, null];
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class _LiveMapState extends State<LiveMap> {
                 setState(() {
                   print(this.recommended);
                   
-                  this.recommended = getRecommended(this.items.map<String>((e) => e.name).toSet(), widget.user.visitedList) as List<String>;
+                  this.recommended = getRecommended(this.items.toSet(), widget.user.visitedList);
                 });
               },
               // ),
@@ -151,10 +151,19 @@ class _LiveMapState extends State<LiveMap> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              IconButton(onPressed: (){},
+              IconButton(onPressed: (){
+                if (this.recommended[0] == null) {
+                  return;
+                }
+                LatLng pos = LatLng(this.recommended[0]!.lat, this.recommended[0]!.lon);
+
+                setState(() {
+                  _mapController.move(pos, 16);
+                });
+              },
                 icon: Icon(Icons.sports_baseball), 
                 color: Color.fromRGBO(66, 66, 66, 1)),
-              Text("     " + this.recommended[0]),
+              Text("     " + (this.recommended[0]?.name ?? "-")),
             ],),
               // const SizedBox(
               //   height: 20,
@@ -164,10 +173,19 @@ class _LiveMapState extends State<LiveMap> {
               children: [
               // Icon(Icons.theater_comedy_sharp, color: Color.fromRGBO(66, 66, 66, 1)),
               // Text("     " + this.recommended[1]),
-              IconButton(onPressed: (){},
+              IconButton(onPressed: (){
+                if (this.recommended[1] == null) {
+                  return;
+                }
+                LatLng pos = LatLng(this.recommended[1]!.lat, this.recommended[1]!.lon);
+
+                setState(() {
+                  _mapController.move(pos, 16);
+                });
+              },
                 icon: Icon(Icons.theater_comedy_sharp), 
                 color: Color.fromRGBO(66, 66, 66, 1)),
-              Text("     " + this.recommended[1]),
+              Text("     " + (this.recommended[1]?.name ?? "-")),
             ],),
               // const SizedBox(
               //   height: 20,
@@ -177,10 +195,19 @@ class _LiveMapState extends State<LiveMap> {
               children: [
               // Icon(Icons.church, color: Color.fromRGBO(66, 66, 66, 1)),
               // Text("     " + this.recommended[2]),
-                IconButton(onPressed: (){},
+                IconButton(onPressed: (){
+                  if (this.recommended[2] == null) {
+                    return;
+                  }
+                  LatLng pos = LatLng(this.recommended[2]!.lat, this.recommended[2]!.lon);
+
+                  setState(() {
+                    _mapController.move(pos, 16);//_mapController.zoom);
+                  });
+                },
                 icon: Icon(Icons.church), 
                 color: Color.fromRGBO(66, 66, 66, 1)),
-              Text("     " + this.recommended[2]),
+              Text("     " + (this.recommended[2]?.name ?? "-")),
             ],),
             ],)
             ),

@@ -16,6 +16,7 @@ class OSMMarker extends Marker {
       : 
       this.name = name,
       super(
+          anchorPos: AnchorPos.align(AnchorAlign.top),
           height: width,
           width: height,
           point: point,
