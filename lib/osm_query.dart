@@ -22,9 +22,9 @@ class OsmItem {
     width: 80,
     height: 80,
     builder: (context) => const Icon(
-      Icons.circle,
-      color: Colors.red,
-      size: 12,
+      Icons.location_on,
+      color: Color.fromRGBO(206, 147, 216, 1),
+      size: 20,
     ),
   );
 
