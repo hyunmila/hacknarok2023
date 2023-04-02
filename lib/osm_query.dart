@@ -63,7 +63,7 @@ class OsmQuery {
     final Completer<List<OsmItem>> c = Completer();
 
     http.post(overpassApiURI, body: body).then((response) {
-      var data = jsonDecode(response.body);
+      var data = jsonDecode(utf8.decode(response.bodyBytes));
 
       var items = data["elements"].map((x) =>
         OsmItem(
