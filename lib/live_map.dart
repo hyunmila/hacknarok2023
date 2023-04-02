@@ -50,7 +50,7 @@ class _LiveMapState extends State<LiveMap> {
           Expanded(
             // width: 200,
             // height: 200,
-            flex: 3,
+            flex: 5,
             child: FlutterMap(
               mapController: _mapController,
               options: MapOptions(
@@ -98,8 +98,11 @@ class _LiveMapState extends State<LiveMap> {
           // const SizedBox(
           // height: 50,
           // ),
+
+
+
           Expanded(
-            flex: 1,
+            flex: 2,
             child: 
             Container(
               color: Colors.pink.shade200,
@@ -117,13 +120,11 @@ class _LiveMapState extends State<LiveMap> {
                   IconButton(
               onPressed: () async {
                 WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
-
                 await OsmQuery.queryNodesAround(5000, _mapController.center.latitude, _mapController.center.longitude, {"sport": ["*"]}).then((new_items) {
                   setState(() {
                       this.items = new_items;
                   });
                 });
-
                 },
             icon: const Icon(Icons.search,
             color: Color.fromRGBO(66, 66, 66, 1))),
@@ -150,25 +151,35 @@ class _LiveMapState extends State<LiveMap> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(Icons.sports_baseball, color: Color.fromRGBO(66, 66, 66, 1)),
+              IconButton(onPressed: (){},
+                icon: Icon(Icons.sports_baseball), 
+                color: Color.fromRGBO(66, 66, 66, 1)),
               Text("     " + this.recommended[0]),
             ],),
-              const SizedBox(
-                height: 20,
-              ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(Icons.theater_comedy_sharp, color: Color.fromRGBO(66, 66, 66, 1)),
+              // Icon(Icons.theater_comedy_sharp, color: Color.fromRGBO(66, 66, 66, 1)),
+              // Text("     " + this.recommended[1]),
+              IconButton(onPressed: (){},
+                icon: Icon(Icons.theater_comedy_sharp), 
+                color: Color.fromRGBO(66, 66, 66, 1)),
               Text("     " + this.recommended[1]),
             ],),
-              const SizedBox(
-                height: 20,
-              ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Icon(Icons.church, color: Color.fromRGBO(66, 66, 66, 1)),
+              // Icon(Icons.church, color: Color.fromRGBO(66, 66, 66, 1)),
+              // Text("     " + this.recommended[2]),
+                IconButton(onPressed: (){},
+                icon: Icon(Icons.church), 
+                color: Color.fromRGBO(66, 66, 66, 1)),
               Text("     " + this.recommended[2]),
             ],),
             ],)
